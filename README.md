@@ -1,3 +1,8 @@
+## Answer to a theoretical question
+ - I'd change taxonomy for tags on simpler structure, would be great to extend db by custom tables.
+ - I'd pay better attention on indexing and caching, and most likely some kind of engine like Elasticsearch, but it depends on plugin requirements.
+- Also, would be great to restrict active marker data to visible area of map and manage them depending on map state, that don't waste resources on things that are outside the visible scope.
+
 ## Task scope
 Create WordPress plugin that draws markers on map using [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/api/), allows visitors to search/filter markers by tags and to add their own markers.
 

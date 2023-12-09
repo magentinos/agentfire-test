@@ -1,0 +1,48 @@
+<div class="agentfire-test">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 filters">
+                <h3>Filters</h3>
+                <div class="form-group row mb-2">
+                    <div class="col-sm-12">
+                        <input type="search" class="form-control" id="search" placeholder="Type name and press enter">
+                    </div>
+                </div>
+                {% if is_user_logged_in %}
+                    <div class="form-group row mb-2">
+                        <div class="col-sm-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="currentUserMarkers"
+                                       id="currentUserMarkers">
+                                <label class="form-check-label" for="currentUserMarkers">
+                                    Current user markers
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="form-group row">
+                    <h5>Tags</h5>
+                    <div id="tags" class="col-sm-12">
+                        {% for tag in tags %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="{{ tag.id }}"
+                                       id="flexCheckDefault-{{ tag.id }}">
+                                <label class="form-check-label" for="flexCheckDefault-{{ tag.id }}">
+                                    {{ tag.name }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div id="map" class="map"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    testScripts.init()
+</script>

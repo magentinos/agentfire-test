@@ -6,9 +6,8 @@ namespace AgentFire\Plugin\Test;
 
 use AgentFire\Plugin\Test\Traits\Singleton;
 
-
 /**
- * Class Rest
+ * Class Admin
  * @package AgentFire\Plugin\Test
  */
 class Admin {
@@ -27,9 +26,14 @@ class Admin {
 	 */
 	public function menu() {
 		if ( function_exists( 'acf_add_options_page' ) ) {
-			// acf_add_options_page( [ ... ] );
+            acf_add_options_page( [
+                'page_title' => __('AgentFire Test', AGENTFIRE_TEST_L10N_DOMAIN),
+                'menu_title' => __('AgentFire Test', AGENTFIRE_TEST_L10N_DOMAIN),
+                'menu_slug'  => 'test-settings',
+                'capability' => 'manage_options',
+            ] );
 		} else {
-			$slug = add_menu_page( 'AgentFire Test', 'AgentFire Test', 'manage_options', 'test-settings', [ $this, 'renderPage' ] );
+			$slug = add_menu_page( __('AgentFire Test', AGENTFIRE_TEST_L10N_DOMAIN), __('AgentFire Test', AGENTFIRE_TEST_L10N_DOMAIN), 'manage_options', 'test-settings', [ $this, 'renderPage' ] );
 			add_action( "load-{$slug}", [ $this, 'adminLoad' ] );
 		}
 	}
@@ -75,12 +79,12 @@ class Admin {
 						</div>
 						<div id="postbox-container-2" class="postbox-container">
 							<div id="normal-sortables" class="meta-box-sortables ui-sortable">
-								<div id="<?=$options['id']?>" class="postbox  acf-postbox">
+								<div id="<?=$options['id']?>" class="postbox acf-postbox">
 									<button type="button" class="handlediv" aria-expanded="true"><span class="toggle-indicator" aria-hidden="true"></span></button>
 									<h2 class="hndle ui-sortable-handle"><span>Settings</span></h2>
 									<div class="inside acf-fields -top">
 										<?php
-											acf_render_fields( 'options', $fields );
+											acf_render_fields( $fields, 'options' );
 										?>
 										<script type="text/javascript">
 											if( typeof acf !== 'undefined' ) {
@@ -105,7 +109,7 @@ class Admin {
 	}
 
 	public function adminLoad() {
-		if ( acf_verify_nonce( 'options' ) ) {
+		if ( acf_verify_nonce( 'post' ) ) {
 			if ( acf_validate_save_post( true ) ) {
 				acf_save_post( 'options' );
 				wp_redirect( add_query_arg( [ 'message' => '1' ] ) );
@@ -123,27 +127,33 @@ class Admin {
 		if ( function_exists( 'acf_add_local_field_group' ) ) {
 			acf_add_local_field_group( [
 				'key'                   => $this->key,
-				'title'                 => 'Test Settings',
-				'fields'                => [
-					// ...
-				],
-				'location'              => [
-					[
-						[
-							'param'    => 'options_page',
-							'operator' => '==',
-							'value'    => $this->slug,
-						],
-					],
-				],
-				'menu_order'            => 10,
-				'position'              => 'normal',
-				'style'                 => 'default',
-				'label_placement'       => 'top',
-				'instruction_placement' => 'label',
-				'hide_on_screen'        => '',
-				'active'                => 1,
-				'description'           => '',
+				'title'                 => __('Test Settings', AGENTFIRE_TEST_L10N_DOMAIN),
+                'fields'                => [
+                    [
+                        'key'      => 'mapbox_access_token',
+                        'label'    => __('Mapbox Access Token', AGENTFIRE_TEST_L10N_DOMAIN),
+                        'name'     => 'mapbox_access_token',
+                        'type'     => 'text',
+                        'required' => 1,
+                    ],
+                ],
+                'location'              => [
+                    [
+                        [
+                            'param'    => 'options_page',
+                            'operator' => '==',
+                            'value'    => $this->slug,
+                        ],
+                    ],
+                ],
+                'menu_order'            => 10,
+                'position'              => 'normal',
+                'style'                 => 'default',
+                'label_placement'       => 'top',
+                'instruction_placement' => 'label',
+                'hide_on_screen'        => '',
+                'active'                => 1,
+                'description'           => '',
 			] );
 		}
 	}

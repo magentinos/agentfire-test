@@ -7,6 +7,8 @@ namespace AgentFire\Plugin;
 use AgentFire\Plugin\Test\Traits\Singleton;
 use AgentFire\Plugin\Test\Rest;
 use AgentFire\Plugin\Test\Admin;
+use AgentFire\Plugin\Test\Marker;
+use AgentFire\Plugin\Test\Shortcode;
 
 /**
  * Class Test
@@ -15,8 +17,11 @@ use AgentFire\Plugin\Test\Admin;
 class Test {
 	use Singleton;
 
-	public function __construct() {
-		Rest::getInstance();
-		Admin::getInstance();
-	}
+    public function __construct()
+    {
+        Marker::getInstance();
+        Rest::getInstance();
+        Admin::getInstance();
+        Shortcode::getInstance();
+    }
 }
