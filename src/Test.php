@@ -17,11 +17,10 @@ use AgentFire\Plugin\Test\Shortcode;
 class Test {
 	use Singleton;
 
-    public function __construct()
-    {
-        Marker::getInstance();
-        Rest::getInstance();
-        Admin::getInstance();
-        Shortcode::getInstance();
-    }
+	public function __construct() {
+		Marker::getInstance();
+		Rest::getInstance();
+		Admin::getInstance();
+		Shortcode::getInstance();
+	}
 }

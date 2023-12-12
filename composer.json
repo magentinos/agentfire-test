@@ -1,14 +1,14 @@
 {
-    "name": "agentfire/test",
-    "type": "wordpress-plugin",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "AgentFire\\Plugin\\": "src"
-        }
-    },
-    "require": {
-        "twig/twig": "^3.0",
-        "php-curl-class/php-curl-class": "^8.6"
+  "name": "agentfire/test",
+  "type": "wordpress-plugin",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "AgentFire\\Plugin\\": "src"
     }
+  },
+  "require": {
+    "twig/twig": "^3.0",
+    "php-curl-class/php-curl-class": "^8.6"
+  }
 }
